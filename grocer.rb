@@ -4,8 +4,9 @@ def consolidate_cart(cart)
     items_array.each do |item, attribute_hash| 
       new_cart[item] ||= attribute_hash 
       new_cart[item][:count]
-      if true then new_cart[item][:count] += 1 
+      if TRUE new_cart[item][:count] += 1 
       else new_cart[item][:count] = 1 
+      end
 end 
 new_cart 
 end
