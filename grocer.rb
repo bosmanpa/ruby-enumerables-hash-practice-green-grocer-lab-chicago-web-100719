@@ -15,7 +15,7 @@ consolidated_cart = {}
 end
 
 def apply_coupons(cart, coupons) 
-  coupons.each so |coupon| 
+  coupons.each do |coupon| 
   
 end
 
