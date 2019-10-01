@@ -1,5 +1,5 @@
 def consolidate_cart(cart) 
-  new_cart = {} 
+  consolidated_cart = {} 
   cart.each do |items_array| 
     items_array.each do |item, attribute| 
       new_cart[item] ||= attribute 
