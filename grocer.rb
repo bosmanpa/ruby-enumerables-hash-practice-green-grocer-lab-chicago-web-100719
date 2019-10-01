@@ -13,15 +13,15 @@ new_cart = {}
   new_cart
 end
 
-def apply_coupons(cart, coupons) 
-  coupons.each do |coupons|
-    name = coupon[:item]
-    item_num = coupon[:num]
-    cart_item = cart[name]
+def apply_coupons(cart, coupons)
+  coupons.each do |coupon|
+    coupon_name = coupon[:item]
+    coupon_item_num = coupon[:num]
+    cart_item = cart[coupon_name]
 
-    next if cart_item.nil? || cart_item[:count] < item_num
+    next if cart_item.nil? || cart_item[:count] < coupon_item_num
 
-    cart_item[:count] -= item_num
+    cart_item[:count] -= coupon_item_num
 
     coupon_in_cart = cart["#{coupon_name} W/COUPON"]
 
