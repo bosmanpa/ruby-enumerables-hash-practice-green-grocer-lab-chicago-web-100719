@@ -44,4 +44,18 @@ cart.each do |item, properties|
   cart
 end
 
-
+def checkout(cart, coupons)
+  new_cart = consolidate_cart(cart)
+  coupon_cart = apply_coupons(new_cart, coupons)
+  clearance_cart = apply_clearance(coupon_cart)
+total = 0
+  clearance_cart.each do |item, hash|
+    total += (hash[:price] * hash[:count])
+  end
+  if total > 100
+    total = (total * 0.9).round(2)
+  else
+    total = total.round(2)
+  end
+  return total 
+end
