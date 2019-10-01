@@ -9,7 +9,6 @@ new_cart = {}
       new_cart[item] = price
       new_cart[item][:count] = 1
     end
-  end
   new_cart
 end
 
