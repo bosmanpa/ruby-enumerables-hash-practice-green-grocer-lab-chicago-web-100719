@@ -14,22 +14,23 @@ end
   new_cart
 end
 
-def apply_coupons (_cart, coupons)
-  coupons.each do |coupon_hash|
-    if consol_cart[coupon_hash[:item]] && coupon_hash[:num] <= consol_cart[coupon_hash[:item]][:count]
-      new_item = coupon_hash[:item] + " W/COUPON"
-      if consol_cart[new_item]
-        consol_cart[new_item][:count] += coupon_hash[:num]
-      else consol_cart[new_item] = {
-        :price => coupon_hash[:cost]/coupon_hash[:num],
-        :clearance => consol_cart[coupon_hash[:item]][:clearance],
-        :count => coupon_hash[:num]
-      }
+def apply_coupons(cart, coupons)
+  coupons.each do |coupon|
+    item = coupon[:item]
+
+    if cart[item] && cart[item][:count] >= coupon[:num]
+      if cart["#{item.upcase} W/COUPON"]
+        cart["#{item.upcase} W/COUPON"][:count] += coupon[:num]
+      else
+        cart["#{item.upcase} W/COUPON"] = { price: coupon[:cost] / coupon[:num], count: coupon[:num], clearance: cart[item][:clearance] }
       end
-      consol_cart[coupon_hash[:item]][:count] -= coupon_hash[:num]
+    else
+      return cart
     end
+
+    cart[item][:count] -= coupon[:num]
   end
-  return consol_cart
+  cart
 end
 
 
