@@ -11,7 +11,8 @@ new_cart
 end
 
 def apply_coupons(cart, coupons)
-  # code here
+  coupons.each do |coupon|
+    coupon.each do |attribute, value|
 end
 
 def apply_clearance(cart)
