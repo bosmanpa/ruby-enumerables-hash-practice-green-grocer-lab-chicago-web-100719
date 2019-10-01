@@ -13,21 +13,23 @@ new_cart = {}
   new_cart
 end
 
-def apply_coupons(cart, coupons)
- coupons.each do |coupon|
-    if cart.has_key?(coupon[:item]) && cart[coupon[:item]][:count] >= coupon[:num]
-      item_withcoupon = coupon[:item] + " W/COUPON"
-      if cart.has_key?(item_withcoupon)
-        cart[item_withcoupon][:count] += 1
-      else
-        cart[item_withcoupon] = {price: coupon[:cost], clearance: cart[coupon[:item]][:clearance], count: 1}
+def apply_coupons (new_cart, coupons)
+  coupons.each do |coupon_hash|
+    if consol_cart[coupon_hash[:item]] && coupon_hash[:num] <= consol_cart[coupon_hash[:item]][:count]
+      new_item = coupon_hash[:item] + " W/COUPON"
+      if consol_cart[new_item]
+        consol_cart[new_item][:count] += coupon_hash[:num]
+      else consol_cart[new_item] = {
+        :price => coupon_hash[:cost]/coupon_hash[:num],
+        :clearance => consol_cart[coupon_hash[:item]][:clearance],
+        :count => coupon_hash[:num]
+      }
       end
-      cart[coupon[:item]][:count] -= coupon[:num]
+      consol_cart[coupon_hash[:item]][:count] -= coupon_hash[:num]
     end
   end
-  cart
+  return consol_cart
 end
-
 
 
 
